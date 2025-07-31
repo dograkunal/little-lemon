@@ -1,29 +1,97 @@
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList, SectionList } from 'react-native';
 import LittleLemonFooter from './LittleLemonFooter';
 
 const menuItemsToDisplay = [
-    { name: 'Hummus', price: '$5.00', id: '1A' },
-    { name: 'Moutabal', price: '$5.00', id: '2B' },
-    { name: 'Falafel', price: '$7.50', id: '3C' },
-    { name: 'Marinated Olives', price: '$5.00', id: '4D' },
-    { name: 'Kofta', price: '$5.00', id: '5E' },
-    { name: 'Eggplant Salad', price: '$8.50', id: '6F' },
-    { name: 'Lentil Burger', price: '$10.00', id: '7G' },
-    { name: 'Smoked Salmon', price: '$14.00', id: '8H' },
-    { name: 'Kofta Burger', price: '$11.00', id: '9I' },
-    { name: 'Turkish Kebab', price: '$15.50', id: '10J' },
-    { name: 'Fries', price: '$3.00', id: '11K' },
-    { name: 'Buttered Rice', price: '$3.00', id: '12L' },
-    { name: 'Bread Sticks', price: '$3.00', id: '13M' },
-    { name: 'Pita Pocket', price: '$3.00', id: '14N' },
-    { name: 'Lentil Soup', price: '$3.75', id: '15O' },
-    { name: 'Greek Salad', price: '$6.00', id: '16Q' },
-    { name: 'Rice Pilaf', price: '$4.00', id: '17R' },
-    { name: 'Baklava', price: '$3.00', id: '18S' },
-    { name: 'Tartufo', price: '$3.00', id: '19T' },
-    { name: 'Tiramisu', price: '$5.00', id: '20U' },
-    { name: 'Panna Cotta', price: '$5.00', id: '21V' },
+    {
+      title: 'Appetizers',
+      data: [{
+        name: 'Hummus',
+        price: '$5.99',
+      },
+      {
+        name: 'Moutabal',
+        price: '$5.99',
+      },
+      {
+        name: 'Falafel',
+        price: '$5.99',
+      },
+      {
+        name: 'Marinated Olives',
+        price: '$5.99',
+      },
+      {
+        name: 'Kofta',
+        price: '$5.99',
+      },
+      {
+        name: 'Eggplant Salad',
+        price: '$5.99',
+      },
+]},
+    {
+      title: 'Main Dishes',
+      data: [{
+        name: 'Lentil Burger',
+        price: '$5.99',
+      },
+      {
+        name: 'Smoked Salmon',
+        price: '$5.99',
+      },
+      {
+        name: 'Kofta Burger',
+        price: '$5.99',
+      },
+      {
+        name: 'Turkish Kebab',
+        price: '$5.99',
+      },
+]},
+    {
+      title: 'Sides',
+      data: [{
+        name: 'Fries',
+        price: '$5.99',
+      },
+      {
+        name: 'Buttered Rice',
+        price: '$5.99',
+      },
+      {
+        name: 'Lentil Soup',
+        price: '$5.99',
+      },
+      {
+        name: 'Greek Salad',
+        price: '$5.99',
+      },
+      {
+        name: 'Rice Pilaf',
+        price: '$5.99',
+      },
+]},
+    {
+      title: 'Desserts',
+      data: [{
+        name: 'Baklava',
+        price: '$5.99',
+      },
+      {
+        name: 'Tartufo',
+        price: '$5.99',
+      },
+      {
+        name: 'Tiramisu',
+        price: '$5.99',
+      },
+      {
+        name: 'Panna Cotta',
+        price: '$5.99',
+      },
+]},
   ];
+  
 
 const Item = ({ name, price }) => (
   <View style={menuStyles.innerContainer}>
@@ -33,21 +101,23 @@ const Item = ({ name, price }) => (
 );
 
 const Separator = () => <View style={menuStyles.separator} />;
-const Header = () => <Text style={menuStyles.headerText}> Menu Items</Text>;
+const Header = () => <Text style={menuStyles.headerText}> Menu</Text>;
 const Footer = () => <LittleLemonFooter />; 
 
 const MenuItems = () => {
   const renderItem = ({ item }) => <Item name={item?.name} price={item?.price} />;
+  const renderSectionHeader = ({ section: { title } }) => <Text style={menuStyles.itemHeader}>{title}</Text>;
 
   return (
     <View style={menuStyles.container}>
-      <FlatList
-        ListHeaderComponent={Header}
-        data={menuItemsToDisplay}
-        keyExtractor={(item) => item.id}
+        <SectionList
+        sections={menuItemsToDisplay}
+        keyExtractor={(item, index) => item + index}
         renderItem={renderItem}
-        ItemSeparatorComponent={Separator}
+        renderSectionHeader={renderSectionHeader}
+        ListHeaderComponent={Header}
         ListFooterComponent={Footer}
+        ItemSeparatorComponent={Separator}
         />
     </View>
   );
@@ -69,7 +139,19 @@ const menuStyles = StyleSheet.create({
     fontSize: 40,
     flexWrap: 'wrap',
     textAlign: 'center',
-  },
+    fontWeight: 'bold',
+    backgroundColor: '#000000',
+    padding: 10,
+},
+itemHeader: {
+    color: 'black',
+    fontSize: 24,
+    backgroundColor: '#035c06',
+    padding: 10,
+    fontWeight: 'semibold',
+    textAlign: 'center',
+    color: 'white',
+},
   itemText: {
     color: '#F4CE14',
     fontSize: 16,
