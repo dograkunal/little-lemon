@@ -110,6 +110,14 @@ const MenuItems = () => {
 
   return (
     <View style={menuStyles.container}>
+      {/* <FlatList
+        data={menuItemsToDisplay}
+        keyExtractor={(item, index) => item + index}
+        renderItem={renderItem}
+        ListHeaderComponent={Header}
+        ListFooterComponent={Footer}
+        ItemSeparatorComponent={Separator}
+      /> */}
         <SectionList
         sections={menuItemsToDisplay}
         keyExtractor={(item, index) => item + index}
