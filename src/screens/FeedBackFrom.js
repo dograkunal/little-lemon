@@ -4,7 +4,6 @@ import authService from "../services/authService";
 import apiService from "../services/apiService";
 
 const FeedbackForm = ({ navigation }) => {
-  // declare the variables
   const [firstName, onChangeFirstName] = useState("");
   const [lastName, onChangeLastName] = useState("");
   const [message, onChangeMessage] = useState("");
