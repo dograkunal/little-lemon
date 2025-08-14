@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, SectionList, TouchableOpacity } from 'react-native';
 import LittleLemonFooter from '../components/LittleLemonFooter';
 import authService from '../services/authService';
+import { useTheme } from '../context/ThemeContext';
 
 const menuItemsToDisplay = [
   {
@@ -94,18 +95,30 @@ const menuItemsToDisplay = [
   ]},
 ];
 
-const Item = ({ name, price }) => (
-  <View style={menuStyles.innerContainer}>
-    <Text style={menuStyles.itemText}>{name}</Text>
-    <Text style={menuStyles.itemText}>{price}</Text>
-  </View>
-);
+const Item = ({ name, price }) => {
+  const { theme } = useTheme();
+  return (
+    <View style={[menuStyles.innerContainer, { backgroundColor: theme.colors.surface }]}>
+      <Text style={[menuStyles.itemText, { color: theme.colors.primary }]}>{name}</Text>
+      <Text style={[menuStyles.itemText, { color: theme.colors.primary }]}>{price}</Text>
+    </View>
+  );
+};
 
-const Separator = () => <View style={menuStyles.separator} />;
-const Header = () => <Text style={menuStyles.headerText}>Menu</Text>;
+const Separator = () => {
+  const { theme } = useTheme();
+  return <View style={[menuStyles.separator, { backgroundColor: theme.colors.border }]} />;
+};
+
+const Header = () => {
+  const { theme } = useTheme();
+  return <Text style={[menuStyles.headerText, { color: theme.colors.text, backgroundColor: theme.colors.background }]}>Menu</Text>;
+};
+
 const Footer = () => <LittleLemonFooter />;
 
 const UserInfoHeader = () => {
+  const { theme } = useTheme();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -122,11 +135,11 @@ const UserInfoHeader = () => {
   }, []);
 
   return (
-    <View style={menuStyles.userInfoContainer}>
-      <Text style={menuStyles.userInfoText}>
+    <View style={[menuStyles.userInfoContainer, { backgroundColor: theme.colors.secondary }]}>
+      <Text style={[menuStyles.userInfoText, { color: theme.colors.primary }]}>
         Welcome, {user?.name || 'Guest'}! 🍋
       </Text>
-      <Text style={menuStyles.userInfoSubtext}>
+      <Text style={[menuStyles.userInfoSubtext, { color: theme.colors.text }]}>
         Explore our delicious menu
       </Text>
     </View>
@@ -134,11 +147,16 @@ const UserInfoHeader = () => {
 };
 
 const MenuScreen = ({ navigation }) => {
+  const { theme } = useTheme();
   const renderItem = ({ item }) => <Item name={item?.name} price={item?.price} />;
-  const renderSectionHeader = ({ section: { title } }) => <Text style={menuStyles.itemHeader}>{title}</Text>;
+  const renderSectionHeader = ({ section: { title } }) => (
+    <Text style={[menuStyles.itemHeader, { color: theme.colors.text, backgroundColor: theme.colors.secondary }]}>
+      {title}
+    </Text>
+  );
 
   return (
-    <View style={menuStyles.container}>
+    <View style={[menuStyles.container, { backgroundColor: theme.colors.background }]}>
       <SectionList
         sections={menuItemsToDisplay}
         keyExtractor={(item, index) => item + index}
@@ -155,10 +173,10 @@ const MenuScreen = ({ navigation }) => {
       />
       
       <TouchableOpacity 
-        style={menuStyles.nextButton}
+        style={[menuStyles.nextButton, { backgroundColor: theme.colors.primary }]}
         onPress={() => navigation.navigate('Feedback')}
       >
-        <Text style={menuStyles.nextButtonText}>Next: Give Feedback</Text>
+        <Text style={[menuStyles.nextButtonText, { color: theme.colors.card }]}>Next: Give Feedback</Text>
       </TouchableOpacity>
     </View>
   );
@@ -169,18 +187,15 @@ const menuStyles = StyleSheet.create({
     flex: 1,
   },
   userInfoContainer: {
-    backgroundColor: '#495E57',
     padding: 20,
     alignItems: 'center',
   },
   userInfoText: {
-    color: '#F4CE14',
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 5,
   },
   userInfoSubtext: {
-    color: '#EDEFEE',
     fontSize: 14,
     opacity: 0.8,
   },
@@ -189,42 +204,33 @@ const menuStyles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 10,
     paddingVertical: 20,
-    backgroundColor: 'black',
   },
   headerText: {
-    color: 'white',
     fontSize: 40,
     flexWrap: 'wrap',
     textAlign: 'center',
     fontWeight: 'bold',
-    backgroundColor: '#000000',
     padding: 10,
   },
   itemHeader: {
-    color: 'white',
     fontSize: 24,
-    backgroundColor: '#035c06',
     padding: 10,
     fontWeight: 'semibold',
     textAlign: 'center',
   },
   itemText: {
-    color: '#F4CE14',
     fontSize: 16,
   },
   separator: {
     height: 1,
-    backgroundColor: '#EDEFEE',
   },
   nextButton: {
-    backgroundColor: '#F4CE14',
     padding: 15,
     margin: 20,
     borderRadius: 8,
     alignItems: 'center',
   },
   nextButtonText: {
-    color: '#000000',
     fontSize: 18,
     fontWeight: 'bold',
   },

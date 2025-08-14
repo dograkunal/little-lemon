@@ -8,18 +8,25 @@ import WelcomeScreen from './src/screens/WelcomeScreen';
 import MenuScreen from './src/screens/MenuScreen';
 import FeedbackForm from './src/screens/FeedBackFrom';
 import authService from './src/services/authService';
+import { ThemeProvider, useTheme } from './src/context/ThemeContext';
+import ThemeToggleButton from './src/components/ThemeToggleButton';
 
 const Stack = createStackNavigator();
 
 // Loading screen component
-const LoadingScreen = () => (
-  <View style={styles.loadingContainer}>
-    <ActivityIndicator size="large" color="#F4CE14" />
-    <Text style={styles.loadingText}>Loading...</Text>
-  </View>
-);
+const LoadingScreen = () => {
+  const { theme } = useTheme();
+  return (
+    <View style={[styles.loadingContainer, { backgroundColor: theme.colors.background }]}>
+      <ActivityIndicator size="large" color={theme.colors.primary} />
+      <Text style={[styles.loadingText, { color: theme.colors.primary }]}>Loading...</Text>
+    </View>
+  );
+};
 
-export default function App() {
+// Themed app component
+const ThemedApp = () => {
+  const { theme } = useTheme();
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -51,11 +58,12 @@ export default function App() {
         initialRouteName={isAuthenticated ? "Welcome" : "Login"}
         screenOptions={{
           headerStyle: {
-            backgroundColor: '#495E57',
+            backgroundColor: theme.colors.secondary,
           },
-          headerTintColor: '#F4CE14',
+          headerTintColor: theme.colors.primary,
           headerTitleStyle: {
             fontWeight: 'bold',
+            color: theme.colors.text,
           },
         }}
       >
@@ -81,6 +89,7 @@ export default function App() {
           options={{ 
             title: 'Our Menu',
             headerLeft: null,
+            headerRight: () => <ThemeToggleButton />,
           }} 
         />
         <Stack.Screen 
@@ -88,10 +97,19 @@ export default function App() {
           component={FeedbackForm} 
           options={{ 
             title: 'Share Your Experience',
+            headerRight: () => <ThemeToggleButton />,
           }} 
         />
       </Stack.Navigator>
     </NavigationContainer>
+  );
+};
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <ThemedApp />
+    </ThemeProvider>
   );
 }
 
@@ -100,10 +118,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#333333',
   },
   loadingText: {
-    color: '#F4CE14',
     fontSize: 18,
     marginTop: 20,
   },

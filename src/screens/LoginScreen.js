@@ -12,8 +12,10 @@ import {
   Image,
 } from "react-native";
 import authService from "../services/authService";
+import { useTheme } from "../context/ThemeContext";
 
 const LoginScreen = ({ navigation }) => {
+  const { theme } = useTheme();
   const [email, setEmail] = useState("demo@example.com");
   const [password, setPassword] = useState("demo123");
   const [isLoading, setIsLoading] = useState(false);
@@ -72,7 +74,7 @@ const LoginScreen = ({ navigation }) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
       <View style={styles.content}>
         <View style={styles.header}>
@@ -80,14 +82,18 @@ const LoginScreen = ({ navigation }) => {
             style={styles.logo}
             source={require("../img/littleLemonHeader.png")}
           />
-          <Text style={styles.subtitle}>Sign in to continue</Text>
+          <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>Sign in to continue</Text>
         </View>
 
         <View style={styles.form}>
           <TextInput
-            style={styles.input}
+            style={[styles.input, { 
+              backgroundColor: theme.colors.surface,
+              color: theme.colors.text,
+              borderColor: theme.colors.border
+            }]}
             placeholder="Email"
-            placeholderTextColor="#666"
+            placeholderTextColor={theme.colors.placeholder}
             value={email}
             onChangeText={setEmail}
             keyboardType="email-address"
@@ -97,9 +103,13 @@ const LoginScreen = ({ navigation }) => {
           />
 
           <TextInput
-            style={styles.input}
+            style={[styles.input, { 
+              backgroundColor: theme.colors.surface,
+              color: theme.colors.text,
+              borderColor: theme.colors.border
+            }]}
             placeholder="Password"
-            placeholderTextColor="#666"
+            placeholderTextColor={theme.colors.placeholder}
             value={password}
             onChangeText={setPassword}
             secureTextEntry
@@ -111,15 +121,16 @@ const LoginScreen = ({ navigation }) => {
           <TouchableOpacity
             style={[
               styles.loginButton,
+              { backgroundColor: theme.colors.primary },
               isLoading && styles.loginButtonDisabled,
             ]}
             onPress={handleLogin}
             disabled={isLoading}
           >
             {isLoading ? (
-              <ActivityIndicator color="#000" />
+              <ActivityIndicator color={theme.colors.card} />
             ) : (
-              <Text style={styles.loginButtonText}>Sign In</Text>
+              <Text style={[styles.loginButtonText, { color: theme.colors.card }]}>Sign In</Text>
             )}
           </TouchableOpacity>
         </View>
@@ -131,7 +142,6 @@ const LoginScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#333333",
   },
   content: {
     flex: 1,
@@ -150,27 +160,23 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 36,
     fontWeight: "bold",
-    color: "#F4CE14",
     marginBottom: 10,
   },
   subtitle: {
     fontSize: 18,
-    color: "#EDEFEE",
     textAlign: "center",
   },
   form: {
     marginBottom: 30,
   },
   input: {
-    backgroundColor: "#EDEFEE",
     borderRadius: 8,
     padding: 15,
     marginBottom: 15,
     fontSize: 16,
-    color: "#333333",
+    borderWidth: 1,
   },
   loginButton: {
-    backgroundColor: "#F4CE14",
     borderRadius: 8,
     padding: 15,
     alignItems: "center",
@@ -180,25 +186,21 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   loginButtonText: {
-    color: "#000000",
     fontSize: 18,
     fontWeight: "bold",
   },
   demoButton: {
-    backgroundColor: "#495E57",
     borderRadius: 8,
     padding: 12,
     alignItems: "center",
   },
   demoButtonText: {
-    color: "#EDEFEE",
     fontSize: 14,
   },
   footer: {
     alignItems: "center",
   },
   footerText: {
-    color: "#EDEFEE",
     fontSize: 12,
     textAlign: "center",
     opacity: 0.7,

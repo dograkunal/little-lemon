@@ -1,10 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { useTheme } from '../context/ThemeContext';
 
 export default function LittleLemonFooter() {
+  const { theme } = useTheme();
+  
   return (
-    <View style={styles.container}>
-      <Text style={styles.footerText}>
+    <View style={[styles.container, { backgroundColor: theme.colors.primary }]}>
+      <Text style={[styles.footerText, { color: theme.colors.card }]}>
         All rights reserved by Little Lemon, 2025
       </Text>
     </View>
@@ -16,12 +19,10 @@ export default function LittleLemonFooter() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#F4CE14',
     marginBottom: 20,
   },
   footerText: {
     fontSize: 18,
-    color: 'black',
     textAlign: 'center',
     fontStyle: 'italic',
   },
