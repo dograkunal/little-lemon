@@ -4,6 +4,7 @@ import { Text, View, Platform } from 'react-native';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import ThemeToggleButton from '../components/ThemeToggleButton';
+import LogoutButton from '../components/LogoutButton';
 
 import MenuScreen from '../screens/MenuScreen';
 import FeedbackForm from '../screens/FeedBackFrom';
@@ -42,7 +43,7 @@ const TabBarIcon = ({ name, focused, color }) => {
   );
 };
 
-const TabNavigator = () => {
+const TabNavigator = ({ navigation }) => {
   const { theme } = useTheme();
 
   return (
@@ -111,7 +112,12 @@ const TabNavigator = () => {
         component={SettingsScreen} 
         options={{ 
           headerShown: true,
-          headerRight: () => <ThemeToggleButton />,
+          headerRight: () => (
+            <>
+              <ThemeToggleButton />
+              <LogoutButton navigation={navigation} />
+            </>
+          ),
         }} 
       />
     </Tab.Navigator>
