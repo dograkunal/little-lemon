@@ -38,17 +38,6 @@ const TabBarIcon = ({ name, focused, color }) => {
         size={getIconSize()} 
         color={color} 
       />
-      <Text 
-        style={{ 
-          fontSize: 12, 
-          color,
-          marginTop: 4,
-          fontWeight: focused ? 'bold' : 'normal',
-          fontFamily: Platform.OS === 'ios' ? 'System' : 'sans-serif-medium'
-        }}
-      >
-        {name}
-      </Text>
     </View>
   );
 };
@@ -102,7 +91,7 @@ const TabNavigator = () => {
       })}
     >
       <Tab.Screen 
-        name="Menu" 
+        name="Menu"
         component={MenuScreen} 
         options={{ 
           headerShown: true,
@@ -110,7 +99,7 @@ const TabNavigator = () => {
         }} 
       />
       <Tab.Screen 
-        name="Feedback" 
+        name="Feedback"
         component={FeedbackForm} 
         options={{ 
           headerShown: true,
@@ -118,7 +107,7 @@ const TabNavigator = () => {
         }} 
       />
       <Tab.Screen 
-        name="Settings" 
+        name="Settings"
         component={SettingsScreen} 
         options={{ 
           headerShown: true,

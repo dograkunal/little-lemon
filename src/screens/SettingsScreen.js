@@ -71,7 +71,6 @@ const SettingsScreen = () => {
   };
 
   const handleSelectPicture = () => {
-
     Alert.alert(
       "Profile Picture",
       "Profile picture selection would be implemented here with expo-image-picker"
@@ -96,20 +95,10 @@ const SettingsScreen = () => {
               { backgroundColor: theme.colors.secondary },
             ]}
           >
-            <Text
-              style={[
-                styles.headerTitle,
-                { color: theme.colors.primary },
-              ]}
-            >
+            <Text style={[styles.headerTitle, { color: theme.colors.primary }]}>
               Profile Settings
             </Text>
-            <Text
-              style={[
-                styles.headerSubtitle,
-                { color: theme.colors.text },
-              ]}
-            >
+            <Text style={[styles.headerSubtitle, { color: theme.colors.text }]}>
               Manage your personal information
             </Text>
           </View>
@@ -128,51 +117,46 @@ const SettingsScreen = () => {
                   style={styles.profilePicture}
                 />
               ) : (
-                                 <View
-                   style={[
-                     styles.profilePicturePlaceholder,
-                     { backgroundColor: theme.colors.surface },
-                   ]}
-                 >
-                   <Ionicons
-                     name="camera"
-                     size={40}
-                     color={theme.colors.placeholder}
-                   />
-                 </View>
+                <View
+                  style={[
+                    styles.profilePicturePlaceholder,
+                    { backgroundColor: theme.colors.surface },
+                  ]}
+                >
+                  <Ionicons
+                    name="camera"
+                    size={40}
+                    color={theme.colors.placeholder}
+                  />
+                </View>
               )}
             </TouchableOpacity>
-                         <TouchableOpacity
-               style={[
-                 styles.changePictureButton,
-                 { backgroundColor: theme.colors.primary },
-               ]}
-               onPress={handleSelectPicture}
-             >
-               <Ionicons
-                 name="camera-outline"
-                 size={16}
-                 color={theme.colors.card}
-                 style={{ marginRight: 8 }}
-               />
-               <Text
-                 style={[
-                   styles.changePictureButtonText,
-                   { color: theme.colors.card },
-                 ]}
-               >
-                 Change Picture
-               </Text>
-             </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.changePictureButton,
+                { backgroundColor: theme.colors.primary },
+              ]}
+              onPress={handleSelectPicture}
+            >
+              <Ionicons
+                name="camera-outline"
+                size={16}
+                color={theme.colors.card}
+                style={{ marginRight: 8 }}
+              />
+              <Text
+                style={[
+                  styles.changePictureButtonText,
+                  { color: theme.colors.card },
+                ]}
+              >
+                Change Picture
+              </Text>
+            </TouchableOpacity>
           </View>
 
           <View style={styles.formSection}>
-            <Text
-              style={[
-                styles.sectionTitle,
-                { color: theme.colors.text },
-              ]}
-            >
+            <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
               Personal Information
             </Text>
 
@@ -248,12 +232,7 @@ const SettingsScreen = () => {
             ]}
             onPress={handleSaveProfile}
           >
-            <Text
-              style={[
-                styles.saveButtonText,
-                { color: theme.colors.card },
-              ]}
-            >
+            <Text style={[styles.saveButtonText, { color: theme.colors.card }]}>
               Save Changes
             </Text>
           </TouchableOpacity>
@@ -317,9 +296,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   changePictureButtonText: {
     fontSize: 14,
@@ -343,15 +322,15 @@ const styles = StyleSheet.create({
     ...Platform.select({
       android: {
         elevation: 1,
-        backgroundColor: 'transparent',
+        backgroundColor: "transparent",
       },
       ios: {
-        shadowColor: '#000',
+        shadowColor: "#000",
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.1,
         shadowRadius: 1,
-      }
-    })
+      },
+    }),
   },
   buttonContainer: {
     padding: 20,
@@ -365,12 +344,12 @@ const styles = StyleSheet.create({
         elevation: 4,
       },
       ios: {
-        shadowColor: '#000',
+        shadowColor: "#000",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 3,
-      }
-    })
+      },
+    }),
   },
   saveButtonText: {
     fontSize: 16,

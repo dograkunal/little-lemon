@@ -8,7 +8,6 @@ import {
   Alert,
   Image,
 } from "react-native";
-import authService from "../services/authService";
 import { useTheme } from "../context/ThemeContext";
 import ThemeSelector from "../components/ThemeSelector";
 
@@ -16,27 +15,6 @@ export default function WelcomeScreen({ navigation }) {
   const { theme } = useTheme();
   const [themeSelectorVisible, setThemeSelectorVisible] = useState(false);
 
-  const handleLogout = async () => {
-    Alert.alert("Logout", "Are you sure you want to logout?", [
-      {
-        text: "Cancel",
-        style: "cancel",
-      },
-      {
-        text: "Logout",
-        style: "destructive",
-        onPress: async () => {
-          try {
-            await authService.logout();
-            navigation.replace("Login");
-          } catch (error) {
-            console.error("Logout error:", error);
-            navigation.replace("Login");
-          }
-        },
-      },
-    ]);
-  };
 
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
@@ -65,17 +43,11 @@ export default function WelcomeScreen({ navigation }) {
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={[styles.nextButton, { backgroundColor: theme.colors.primary }]}
-          onPress={() => navigation.navigate("Menu")}
+          onPress={() => navigation.navigate("Main")}
         >
-          <Text style={[styles.nextButtonText, { color: theme.colors.card }]}>Menu</Text>
+          <Text style={[styles.nextButtonText, { color: theme.colors.card }]}>Get Started</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity 
-          style={[styles.logoutButton, { backgroundColor: theme.colors.secondary }]} 
-          onPress={handleLogout}
-        >
-          <Text style={[styles.logoutButtonText, { color: theme.colors.text }]}>Logout</Text>
-        </TouchableOpacity>
       </View>
 
       <ThemeSelector
@@ -133,15 +105,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   themeButtonText: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  logoutButton: {
-    padding: 15,
-    borderRadius: 8,
-    alignItems: "center",
-  },
-  logoutButtonText: {
     fontSize: 16,
     fontWeight: "bold",
   },
