@@ -214,6 +214,7 @@ const FeedbackForm = ({ navigation }) => {
             style={[
               styles.submitButton,
               { backgroundColor: theme.colors.secondary },
+              {marginTop: 10},
             ]}
             onPress={() => navigation.navigate("Subscribe")}
           >
@@ -221,7 +222,7 @@ const FeedbackForm = ({ navigation }) => {
               name="mail"
               size={18}
               color={theme.colors.card}
-              style={{ marginRight: 8 }}
+              style={{ marginRight: 8, }}
             />
             <Text
               style={[styles.submitButtonText, { color: theme.colors.card }]}
