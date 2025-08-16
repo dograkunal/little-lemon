@@ -172,12 +172,7 @@ const MenuScreen = ({ navigation }) => {
         ItemSeparatorComponent={Separator}
       />
       
-      <TouchableOpacity 
-        style={[menuStyles.nextButton, { backgroundColor: theme.colors.primary }]}
-        onPress={() => navigation.navigate('Feedback')}
-      >
-        <Text style={[menuStyles.nextButtonText, { color: theme.colors.card }]}>Next: Give Feedback</Text>
-      </TouchableOpacity>
+
     </View>
   );
 };

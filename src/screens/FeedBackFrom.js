@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import authService from "../services/authService";
 import apiService from "../services/apiService";
 import { useTheme } from "../context/ThemeContext";
@@ -191,23 +192,17 @@ const FeedbackForm = ({ navigation }) => {
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={[
-              styles.backButton,
-              { backgroundColor: theme.colors.secondary },
-            ]}
-            onPress={() => navigation.goBack()}
-          >
-            <Text style={[styles.backButtonText, { color: theme.colors.text }]}>
-              Back to Menu
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[
               styles.submitButton,
               { backgroundColor: theme.colors.primary },
             ]}
             onPress={handleSubmit}
           >
+            <Ionicons
+              name="send"
+              size={18}
+              color={theme.colors.card}
+              style={{ marginRight: 8 }}
+            />
             <Text
               style={[styles.submitButtonText, { color: theme.colors.card }]}
             >
@@ -249,6 +244,18 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     fontSize: 16,
+    ...Platform.select({
+      android: {
+        elevation: 1,
+        backgroundColor: 'transparent',
+      },
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.1,
+        shadowRadius: 1,
+      }
+    })
   },
   messageInput: {
     height: 100,
@@ -256,6 +263,18 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     fontSize: 16,
+    ...Platform.select({
+      android: {
+        elevation: 1,
+        backgroundColor: 'transparent',
+      },
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.1,
+        shadowRadius: 1,
+      }
+    })
   },
   infoSection: {
     fontSize: 24,
@@ -270,26 +289,27 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
     padding: 20,
-    gap: 10,
-  },
-  backButton: {
-    padding: 15,
-    borderRadius: 8,
-    flex: 1,
     alignItems: "center",
-  },
-  backButtonText: {
-    fontSize: 16,
-    fontWeight: "bold",
   },
   submitButton: {
     padding: 15,
     borderRadius: 8,
-    flex: 1,
+    width: "80%",
     alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "center",
+    ...Platform.select({
+      android: {
+        elevation: 4,
+      },
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+      }
+    })
   },
   submitButtonText: {
     fontSize: 16,

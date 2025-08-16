@@ -57,8 +57,12 @@ class AuthService {
             id: 1,
             email: email,
             name: 'Little Lemon User',
+            firstName: 'Little',
+            lastName: 'Lemon',
             role: 'customer',
             avatar: null,
+            profilePicture: null,
+            gender: '',
           }
         };
 
@@ -172,6 +176,18 @@ class AuthService {
       await this.initialize();
     }
     return this.user;
+  }
+
+  // Update user data
+  async updateUser(updatedUserData) {
+    try {
+      this.user = { ...this.user, ...updatedUserData };
+      await this.setUser(this.user);
+      return this.user;
+    } catch (error) {
+      console.error('Failed to update user:', error);
+      throw error;
+    }
   }
 
   // Check if user is authenticated

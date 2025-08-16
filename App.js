@@ -5,8 +5,7 @@ import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 
 import LoginScreen from './src/screens/LoginScreen';
 import WelcomeScreen from './src/screens/WelcomeScreen';
-import MenuScreen from './src/screens/MenuScreen';
-import FeedbackForm from './src/screens/FeedBackFrom';
+import TabNavigator from './src/navigation/TabNavigator';
 import authService from './src/services/authService';
 import { ThemeProvider, useTheme } from './src/context/ThemeContext';
 import ThemeToggleButton from './src/components/ThemeToggleButton';
@@ -84,20 +83,11 @@ const ThemedApp = () => {
           }} 
         />
         <Stack.Screen 
-          name="Menu" 
-          component={MenuScreen} 
+          name="Main" 
+          component={TabNavigator} 
           options={{ 
-            title: 'Our Menu',
-            headerLeft: null,
-            headerRight: () => <ThemeToggleButton />,
-          }} 
-        />
-        <Stack.Screen 
-          name="Feedback" 
-          component={FeedbackForm} 
-          options={{ 
-            title: 'Share Your Experience',
-            headerRight: () => <ThemeToggleButton />,
+            title: 'Little Lemon',
+            headerShown: false 
           }} 
         />
       </Stack.Navigator>
