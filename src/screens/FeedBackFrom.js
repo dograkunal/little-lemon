@@ -209,6 +209,26 @@ const FeedbackForm = ({ navigation }) => {
               Submit Feedback
             </Text>
           </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[
+              styles.submitButton,
+              { backgroundColor: theme.colors.secondary },
+            ]}
+            onPress={() => navigation.navigate("Subscribe")}
+          >
+            <Ionicons
+              name="mail"
+              size={18}
+              color={theme.colors.card}
+              style={{ marginRight: 8 }}
+            />
+            <Text
+              style={[styles.submitButtonText, { color: theme.colors.card }]}
+            >
+              Subscribe
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     </KeyboardAvoidingView>
@@ -247,15 +267,15 @@ const styles = StyleSheet.create({
     ...Platform.select({
       android: {
         elevation: 1,
-        backgroundColor: 'transparent',
+        backgroundColor: "transparent",
       },
       ios: {
-        shadowColor: '#000',
+        shadowColor: "#000",
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.1,
         shadowRadius: 1,
-      }
-    })
+      },
+    }),
   },
   messageInput: {
     height: 100,
@@ -266,15 +286,15 @@ const styles = StyleSheet.create({
     ...Platform.select({
       android: {
         elevation: 1,
-        backgroundColor: 'transparent',
+        backgroundColor: "transparent",
       },
       ios: {
-        shadowColor: '#000',
+        shadowColor: "#000",
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.1,
         shadowRadius: 1,
-      }
-    })
+      },
+    }),
   },
   infoSection: {
     fontSize: 24,
@@ -304,12 +324,12 @@ const styles = StyleSheet.create({
         elevation: 4,
       },
       ios: {
-        shadowColor: '#000',
+        shadowColor: "#000",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 3,
-      }
-    })
+      },
+    }),
   },
   submitButtonText: {
     fontSize: 16,

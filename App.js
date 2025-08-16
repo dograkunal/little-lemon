@@ -6,6 +6,7 @@ import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import LoginScreen from './src/screens/LoginScreen';
 import WelcomeScreen from './src/screens/WelcomeScreen';
 import TabNavigator from './src/navigation/TabNavigator';
+import SubscribeScreen from './src/screens/SubscribeScreen';
 import authService from './src/services/authService';
 import { ThemeProvider, useTheme } from './src/context/ThemeContext';
 import ThemeToggleButton from './src/components/ThemeToggleButton';
@@ -88,6 +89,14 @@ const ThemedApp = () => {
           options={{ 
             title: 'Little Lemon',
             headerShown: false 
+          }} 
+        />
+        <Stack.Screen 
+          name="Subscribe" 
+          component={SubscribeScreen} 
+          options={{ 
+            title: 'Newsletter Subscription',
+            headerShown: true,
           }} 
         />
       </Stack.Navigator>
